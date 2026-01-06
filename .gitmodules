@@ -1,0 +1,6 @@
+[submodule "dependencies/cffdrs"]
+	path = dependencies/cffdrs
+	url = https://github.com/gagreene/cffdrs.git
+[submodule "dependencies/flame_components"]
+	path = dependencies/flame_components
+	url = https://github.com/gagreene/flame_components.git
