@@ -430,7 +430,7 @@ class PYRO:
         # Initialize fire behaviour plugin
         self._log(f'\tInitializing {self.fb_plugin} fire behaviour plugin')
         if self.fb_plugin == 'cffbps':
-            import fbp_plugin as fbp
+            from plugins import fbp_plugin as fbp
 
             pyro_kwargs = {
                 'process_window': self.process_window,
