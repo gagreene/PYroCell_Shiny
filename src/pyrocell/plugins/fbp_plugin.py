@@ -1,5 +1,5 @@
-import cffbps
-import cffbps_cupy
+from dependencies.cffdrs import cffbps
+from dependencies.cffdrs import cffbps_cupy
 import math
 import numpy as np
 import cupy as cp
