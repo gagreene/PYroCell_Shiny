@@ -2,7 +2,6 @@ import os
 from tqdm import tqdm
 from shapely.geometry import Point, LineString, Polygon, MultiLineString, MultiPolygon
 import geopandas as gpd
-# from multiprocessing import current_process
 import concurrent.futures
 from core import PYRO
 
@@ -16,12 +15,11 @@ def run_single_ignition(ignition_feature, shared_args: dict, fb_kwargs: dict, fi
     :param fb_kwargs: Dictionary of arguments specific to the fire behavior model.
     :param fire_id: Unique identifier string for the fire (used in output naming).
     """
-    # proc = current_process().name
-    # print(f'[{proc}] Processing Fire ID: {fire_id}')
-
+    # Get output folder and ensure it exists
     out_folder = shared_args['out_folder']
     os.makedirs(out_folder, exist_ok=True)
 
+    # Assign fire_id
     fire_id = f'FID{fire_id}'
 
     # Save ignition feature to file with prefixed name

@@ -1,7 +1,6 @@
 import os
 import shutil
 from datetime import datetime as dt
-import flame_components as fc
 import math
 import numpy as np
 from osgeo import gdal
@@ -21,6 +20,7 @@ from scipy.optimize import root_scalar
 from typing import Optional, Union
 import copy
 from components import process_outputs as pout
+from dependencies import flame_components as fc
 
 # Enable GDAL exceptions
 gdal.UseExceptions()
