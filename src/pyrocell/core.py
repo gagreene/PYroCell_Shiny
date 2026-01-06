@@ -19,7 +19,7 @@ from numba import jit
 from scipy.optimize import root_scalar
 from typing import Optional, Union
 import copy
-from components import process_outputs as pout
+from pyrocell.components import process_outputs as pout
 from dependencies import flame_components as fc
 
 # Enable GDAL exceptions
