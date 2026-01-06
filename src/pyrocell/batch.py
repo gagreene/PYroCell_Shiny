@@ -3,7 +3,7 @@ from tqdm import tqdm
 from shapely.geometry import Point, LineString, Polygon, MultiLineString, MultiPolygon
 import geopandas as gpd
 import concurrent.futures
-from core import PYRO
+from pyrocell.core import PYRO
 
 
 def run_single_ignition(ignition_feature, shared_args: dict, fb_kwargs: dict, fire_id: str):
