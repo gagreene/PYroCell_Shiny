@@ -19,7 +19,9 @@ from numba import jit
 from scipy.optimize import root_scalar
 from typing import Optional, Union
 import copy
-from pyrocell.components import process_outputs as pout
+import sys
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
+from src.pyrocell.components import process_outputs as pout
 from dependencies.flame_components import flame_components as fc
 
 # Enable GDAL exceptions
@@ -430,7 +432,7 @@ class PYRO:
         # Initialize fire behaviour plugin
         self._log(f'\tInitializing {self.fb_plugin} fire behaviour plugin')
         if self.fb_plugin == 'cffbps':
-            from pyrocell.plugins import fbp_plugin as fbp
+            from src.pyrocell.plugins import fbp_plugin as fbp
 
             pyro_kwargs = {
                 'process_window': self.process_window,
