@@ -1,0 +1,9 @@
+.git/
+.idea/
+dependencies/cffbps_cupy.py
+development/archive/
+development/experimental/
+development/testing/test_data/_Results
+tests/
+**/__pycache__/
+*.pyc
