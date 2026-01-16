@@ -20,6 +20,8 @@ from scipy.optimize import root_scalar
 from typing import Optional, Union
 import copy
 import sys
+os.environ['GDAL_DATA'] = os.path.join(sys.prefix, 'Library', 'share', 'gdal')
+os.environ['GDAL_DRIVER_PATH'] = os.path.join(sys.prefix, 'Library', 'lib', 'gdalplugins')
 sys.path.append(os.path.join(os.path.dirname(__file__), '..', '..'))
 from src.pyrocell.components import process_outputs as pout
 from dependencies.flame_components import flame_components as fc
