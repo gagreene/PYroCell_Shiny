@@ -1,8 +1,6 @@
 from dependencies.cffdrs import cffbps
-from dependencies.cffdrs import cffbps_cupy
 import math
 import numpy as np
-import cupy as cp
 import rasterio as rio
 from rasterio import windows
 from typing import Union, Optional
@@ -30,7 +28,7 @@ class FBP_PLUGIN:
                  percentile_growth: Optional[Union[float, int]] = None,
                  float_dtype: np.dtype = np.float32,
                  use_gpu: bool = False,
-                 gpu_float_dtype: cp.dtype = cp.float32):
+                 gpu_float_dtype: np.dtype = np.float32):
         """
         Initialize the FBP Plugin with parameters essential for simulating fire behavior.
 
@@ -58,7 +56,7 @@ class FBP_PLUGIN:
         :param percentile_growth: Percentile growth value for rate of spread calculations
         :param float_dtype: Maximum data type for float processing (default is np.float32)
         :param use_gpu: Boolean indicating whether to use GPU for processing
-        :param gpu_float_dtype: Maximum data type for GPU float processing (default is cp.float32)
+        :param gpu_float_dtype: Maximum data type for GPU float processing (default is np.float32)
         """
         # Initialize input datasets
         self.process_window = process_window
@@ -469,16 +467,16 @@ class FBP_PLUGIN:
 
         # Load subsets of the required rasters
         if self.use_gpu:
-            fuel_type_subset = cp.asarray(self.fuel_type_array, cp.int8)  # Dataset already subset to window
-            elevation_subset = cp.asarray(self.elevation.read(1, window=window), self.gpu_float_dtype)
-            slope_subset = cp.asarray(self.slope.read(1, window=window), self.gpu_float_dtype)
-            aspect_subset = cp.asarray(self.aspect.read(1, window=window), self.gpu_float_dtype)
-            lat_subset = cp.asarray(self.lat_array, self.gpu_float_dtype)  # Dataset already subset to window
-            long_subset = cp.asarray(self.long_array, self.gpu_float_dtype)  # Dataset already subset to window
+            fuel_type_subset = np.asarray(self.fuel_type_array, np.int8)  # Dataset already subset to window
+            elevation_subset = np.asarray(self.elevation.read(1, window=window), self.gpu_float_dtype)
+            slope_subset = np.asarray(self.slope.read(1, window=window), self.gpu_float_dtype)
+            aspect_subset = np.asarray(self.aspect.read(1, window=window), self.gpu_float_dtype)
+            lat_subset = np.asarray(self.lat_array, self.gpu_float_dtype)  # Dataset already subset to window
+            long_subset = np.asarray(self.long_array, self.gpu_float_dtype)  # Dataset already subset to window
             if process_results:
                 if new_ros is None:
                     raise ValueError('new_ros must be provided if process_results is True')
-                new_ros = cp.asarray(new_ros, dtype=new_ros.dtype)
+                new_ros = np.asarray(new_ros, dtype=new_ros.dtype)
         else:
             fuel_type_subset = self.fuel_type_array
             elevation_subset = self.elevation.read(1, window=window)
@@ -495,9 +493,9 @@ class FBP_PLUGIN:
                     return None
                 if np.any(data == no_data):
                     data = np.where(data == no_data, np.nan, data).astype(self.float_dtype)
-                    return cp.asarray(data, dtype=self.gpu_float_dtype) if use_gpu else data
+                    return np.asarray(data, dtype=self.gpu_float_dtype) if use_gpu else data
                 else:
-                    return cp.asarray(data, dtype=self.gpu_float_dtype) if use_gpu else data
+                    return np.asarray(data, dtype=self.gpu_float_dtype) if use_gpu else data
             else:
                 return dataset
 
